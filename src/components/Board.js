@@ -4,50 +4,62 @@ import Box from "./Box";
 function Board() {
   const [shape, setShape] = useState(false);
 
-  const isClicked = () => {
-    if (shape) {
-        
-    }
-    else{
-
-    }
-    setShape(!shape);
+  const isClicked = (id) => {
+    console.log(id);
   };
   return (
     <div id="board_container">
       <table id="table">
-        <tr className="box">
-          <td>
-            <Box id="1"/>
+        <tr>
+          <td className="box" id="1">
+            <div className="shape" onClick={() => isClicked("1")}>
+              <Box />
+            </div>
           </td>
-          <td class="box vert">
+          <td class="box vert" id="2">
             {" "}
-            <Box id="2"/>
+            <div className="shape" onClick={() => isClicked("2")}>
+              <Box />
+            </div>
           </td>
-          <td className="box">
-            <Box id="3"/>
-          </td>
-        </tr>
-        <tr>
-          <td class="box hori">
-            <Box id="4"/>
-          </td>
-          <td class="box vert hori">
-            <Box id="5"/>
-          </td>
-          <td class="box hori">
-            <Box id="6"/>
+          <td className="box" id="3">
+            <div className="shape" onClick={() => isClicked("3")}>
+              <Box />
+            </div>
           </td>
         </tr>
         <tr>
-          <td className="box">
-            <Box id="7"/>
+          <td class="box hori" id="4">
+            <div className="shape" onClick={() => isClicked("4")}>
+              <Box />
+            </div>
           </td>
-          <td class="box vert">
-            <Box id="8"/>
+          <td class="box vert hori" id="5">
+            <div className="shape" onClick={() => isClicked("5")}>
+              <Box />
+            </div>
           </td>
-          <td className="box">
-            <Box id="9"/>
+          <td class="box hori" id="6">
+            <div className="shape" onClick={() => isClicked("6")}>
+              <Box />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td className="box" id="7">
+            <div className="shape" onClick={() => isClicked("7")}>
+              <Box />
+            </div>
+          </td>
+          <td class="box vert" id="8">
+            <div className="shape" onClick={() => isClicked("8")}>
+              <Box />
+            </div>
+          </td>
+          <td className="box" id="9">
+            <div className="shape" onClick={() => isClicked("9")}>
+              <Box />
+            </div>
           </td>
         </tr>
       </table>
