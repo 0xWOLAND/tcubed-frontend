@@ -1,55 +1,32 @@
 #board_container {
   background-color: aliceblue;
-  width: 45%;
-  height: 45%;
+  width: 45vw;
+  height: 45vw;
   border-radius: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 2px auto 2px auto;
+
+  grid-template-rows: auto 2px auto 2px auto;
 }
 
-td .box {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-tr {
-  margin: 0;
-  border-collapse: collapse;
+.box_element {
+  padding:10%;
+  
 }
 
-.box {
-  padding: 0 !important;
-  border-collapse: collapse;
-  margin: 0;
+.inner_box {
+    width: 100%;
+    height: 100%;
 }
 
-#table {
-  width: 80%;
-  height: 80%;
-  border-collapse: collapse;
+.X {
+  background-color: red;
 }
 
-.vert {
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-}
-.hori {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-}
-.shape {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.O {
+  background-color: blue;
 }
 
-.x {
-    background-color: red;
-}
-
-.o {
-    background-color: blue;
+.border {
+    background-color: black;
 }

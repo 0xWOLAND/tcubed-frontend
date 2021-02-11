@@ -1,70 +1,60 @@
 import React, { useState } from "react";
 import "./style.css";
-import Box from "./Box";
-function Board() {
-  const [shape, setShape] = useState(false);
 
-  const isClicked = (id) => {
-    console.log(id);
-  };
+var count = 0;
+function Board() {
   return (
     <div id="board_container">
-      <table id="table">
-        <tr>
-          <td className="box" id="1">
-            <div className="shape" onClick={() => isClicked("1")}>
-              <Box />
-            </div>
-          </td>
-          <td class="box vert" id="2">
-            {" "}
-            <div className="shape" onClick={() => isClicked("2")}>
-              <Box />
-            </div>
-          </td>
-          <td className="box" id="3">
-            <div className="shape" onClick={() => isClicked("3")}>
-              <Box />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td class="box hori" id="4">
-            <div className="shape" onClick={() => isClicked("4")}>
-              <Box />
-            </div>
-          </td>
-          <td class="box vert hori" id="5">
-            <div className="shape" onClick={() => isClicked("5")}>
-              <Box />
-            </div>
-          </td>
-          <td class="box hori" id="6">
-            <div className="shape" onClick={() => isClicked("6")}>
-              <Box />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td className="box" id="7">
-            <div className="shape" onClick={() => isClicked("7")}>
-              <Box />
-            </div>
-          </td>
-          <td class="box vert" id="8">
-            <div className="shape" onClick={() => isClicked("8")}>
-              <Box />
-            </div>
-          </td>
-          <td className="box" id="9">
-            <div className="shape" onClick={() => isClicked("9")}>
-              <Box />
-            </div>
-          </td>
-        </tr>
-      </table>
+      <Box id="1" />
+      <div className="border"></div>
+      <Box id="2" />
+      <div className="border"></div>
+      <Box id="3" />
+      <div className="border"></div>
+      <div className="border"></div>
+      <div className="border"></div>
+      <div className="border"></div>
+      <div className="border"></div>
+      <Box id="4" />
+      <div className="border"></div>
+      <Box id="5" />
+      <div className="border"></div>
+      <Box id="6" />
+
+      <div className="border"></div>
+      <div className="border"></div>
+      <div className="border"></div>
+      <div className="border"></div>
+      <div className="border"></div>
+      <Box id="7" />
+      <div className="border"></div>
+      <Box id="8" />
+      <div className="border"></div>
+      <Box id="9" />
     </div>
   );
 }
-
+function handleClick(id) {
+  let boxElement = document.getElementById(id);
+  console.log(boxElement);
+  let boxClass = boxElement.className;
+  if (
+    boxClass[boxClass.length - 1] != "X" &&
+    boxClass[boxClass.length - 1] != "O"
+  ) {
+    if (count % 2) {
+      boxElement.className += " X";
+    } else {
+      boxElement.className += " O";
+    }
+    count += 1;
+  }
+}
+function Box(props) {
+  return (
+    <div className="box_element" onClick={() => handleClick(props.id)}>
+      <div className="inner_box" id={props.id}></div>
+    </div>
+  );
+}
 export default Board;
