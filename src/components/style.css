@@ -10,13 +10,12 @@
 }
 
 .box_element {
-  padding:10%;
-  
+  padding: 10%;
 }
 
 .inner_box {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .X {
@@ -28,5 +27,22 @@
 }
 
 .border {
-    background-color: black;
+  background-color: black;
 }
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 5s forwards;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1022;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+  
