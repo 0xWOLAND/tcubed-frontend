@@ -2,7 +2,7 @@ import React, { useEffect, useImperativeHandle, useState } from "react";
 import "./style.css";
 import X from "./x";
 import O from "./o";
-
+import Counter from "./Counter";
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -48,6 +48,8 @@ class Board extends React.Component {
       squares: Array(9).fill(null),
       xIsNext: true,
       num: 0,
+      man: 0,
+      robot: 0,
     };
     this.resetBoard = this.resetBoard.bind(this);
   }
@@ -82,6 +84,13 @@ class Board extends React.Component {
     let status;
     if (winner) {
       status = "Winner: " + winner;
+
+      if (winner == "X") {
+        this.setState({ man: this.state.man + 1 });
+      } else {
+        this.setState({ robot: this.state.robot + 1 });
+      }
+
       reset = (
         <div id="button_container">
           <button className="btn" onClick={this.resetBoard}>
@@ -100,24 +109,27 @@ class Board extends React.Component {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
     return (
-      <div id="main_container">
-        <div className="status">
-          <h1>{status}</h1>
-        </div>
-        <div id="board_container">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
+      <div id="counter_container">
+        <Counter man={this.state.man} robot={this.state.robot} />
+        <div id="main_container">
+          <div className="status">
+            <h1>{status}</h1>
+          </div>
+          <div id="board_container">
+            {this.renderSquare(0)}
+            {this.renderSquare(1)}
+            {this.renderSquare(2)}
 
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
+            {this.renderSquare(3)}
+            {this.renderSquare(4)}
+            {this.renderSquare(5)}
 
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
+            {this.renderSquare(6)}
+            {this.renderSquare(7)}
+            {this.renderSquare(8)}
+          </div>
+          {reset}
         </div>
-        {reset}
       </div>
     );
   }

@@ -14,7 +14,6 @@
   margin: 0 auto;
 }
 
-
 .box_element {
   padding: 10%;
   width: 10vw;
@@ -82,7 +81,7 @@
 }
 .btn::after {
   transition: all 0.15s linear 0s;
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: -4px;
@@ -94,7 +93,7 @@
 }
 .btn::before {
   transition: all 0.15s linear 0s;
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   right: 2px;
@@ -131,7 +130,7 @@ a:active.btn:after {
 .status {
   width: 25vw;
   height: 5vh;
-  background-color: #FFBC42;
+  background-color: #ffbc42;
   margin: 15px;
   color: #242423;
   border-radius: 16px;
@@ -150,8 +149,33 @@ div .btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FFBC42;
+  background-color: #ffbc42;
   margin: 15px;
   padding: 10px;
   border-radius: 16px;
+}
+
+#counter_container {
+  display: flex;
+  align-items: center;
+}
+
+#counter_box {
+  background-color: #ffbc42;
+  height: 25vh;
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  margin: 20px !important;
+}
+
+
+.score_keeper {
+  display: flex;
+  align-items: center;
+  font-size: 64px;
+  margin: 8px;
 }
