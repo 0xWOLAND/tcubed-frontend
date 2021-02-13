@@ -47,7 +47,9 @@ class Board extends React.Component {
     this.state = {
       squares: Array(9).fill(null),
       xIsNext: true,
+      num: 0,
     };
+    this.resetBoard = this.resetBoard.bind(this);
   }
   handleClick(e) {
     const squares = this.state.squares.slice();
@@ -58,6 +60,7 @@ class Board extends React.Component {
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
+      num: this.state.num + 1,
     });
   }
 
@@ -69,20 +72,38 @@ class Board extends React.Component {
       />
     );
   }
+  resetBoard() {
+    let clear = Array(9).fill(null);
+    this.setState({ squares: clear });
+  }
   render() {
+    let reset = <div></div>;
     const winner = calculateWinner(this.state.squares);
     let status;
     if (winner) {
       status = "Winner: " + winner;
-      for (let i = 0; i < 9; i++) {
-        this.state.squares[i] = null;
-      }
+      reset = (
+        <div id="button_container">
+          <button className="btn" onClick={this.resetBoard}>
+            <strong> Reset</strong>
+          </button>
+        </div>
+      );
+    } else if (this.state.num == 9) {
+      status = "Tie";
+      reset = (
+        <button className="btn" onClick={this.resetBoard}>
+          Reset
+        </button>
+      );
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
     return (
-      <div>
-        <div className="status">{status}</div>
+      <div id="main_container">
+        <div className="status">
+          <h1>{status}</h1>
+        </div>
         <div id="board_container">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -96,6 +117,7 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        {reset}
       </div>
     );
   }
