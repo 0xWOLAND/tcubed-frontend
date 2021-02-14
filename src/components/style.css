@@ -35,10 +35,15 @@
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: dash 3s forwards;
-  stroke: #ffbc42;
+}
+.x_line {
+  stroke: #2978a0;
 }
 
-@keyframes dash { 
+.o_path {
+  stroke: #28afb0;
+}
+@keyframes dash {
   from {
     stroke-dashoffset: 1022;
   }
@@ -174,14 +179,12 @@ div .btn {
   margin: 20px !important;
 }
 
-
 .score_keeper {
   display: flex;
   align-items: center;
   font-size: 64px;
   margin: 8px;
 }
-
 
 /* Slider */
 
@@ -196,17 +199,16 @@ div .btn {
   background-color: #ffbc42;
 }
 
-
 .slider {
   -webkit-appearance: none;
   width: 100%;
   height: 15px;
-  border-radius: 5px;  
+  border-radius: 5px;
   background: #d3d3d3;
   outline: none;
   opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
 }
 
 .slider::-webkit-slider-thumb {
@@ -214,8 +216,8 @@ div .btn {
   appearance: none;
   width: 25px;
   height: 25px;
-  border-radius: 50%; 
-  background: #4CAF50;
+  border-radius: 50%;
+  background: #4caf50;
   cursor: pointer;
 }
 
@@ -223,6 +225,34 @@ div .btn {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #4caf50;
   cursor: pointer;
+}
+
+#choose {
+  background-color: #ffbc42;
+  height: 7vh;
+  padding: 10px;
+  width: 18vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 16px;
+  margin: 20px !important;
+}
+
+
+#x_color {
+  background-color: #ffbc42;
+  /* stroke: #242423; */
+  margin: 5px;
+}
+
+#o_color {
+  background-color: #ffbc42;
+  fill: #ffbc42;
+  /* stroke: #242423; */
+
+  margin: 5px;
 }

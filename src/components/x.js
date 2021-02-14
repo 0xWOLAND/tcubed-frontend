@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-function x() {
+function x(props) {
   return (
     <div>
       <svg
@@ -9,7 +9,7 @@ function x() {
         viewBox="0 0 68 68"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="path"
+        className={props.className}
       >
         <g filter="url(#filter0_d)">
           <line
@@ -17,8 +17,10 @@ function x() {
             y1="4.46447"
             x2="59.5355"
             y2="56.4645"
+            className="x_line"
             stroke="black"
             stroke-width="10"
+            id={props.x}
           />
         </g>
         <defs>
@@ -63,7 +65,9 @@ function x() {
             x2="60.4645"
             y2="4.46446"
             stroke="black"
+            className="x_line"
             stroke-width="10"
+            id={props.x}
           />
         </g>
         <defs>

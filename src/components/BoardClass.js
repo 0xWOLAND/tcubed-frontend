@@ -6,6 +6,7 @@ import Counter from "./Counter";
 var man = 0,
   robot = 0;
 var winner = "";
+
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -37,13 +38,13 @@ function Square(props) {
   if (props.value == "X") {
     return (
       <div className="box_element" onClick={props.onClick}>
-        <X />
+        <X className="path" />
       </div>
     );
   } else if (props.value == "O") {
     return (
       <div className="box_element" onClick={props.onClick}>
-        <O />
+        <O className="path" />
       </div>
     );
   } else {
@@ -58,8 +59,10 @@ class Board extends React.Component {
       squares: Array(9).fill(null),
       xIsNext: true,
       num: 0,
+      player: "X",
     };
     this.resetBoard = this.resetBoard.bind(this);
+    this.changePlayer = this.changePlayer.bind(this);
   }
   handleClick(e) {
     if (winner != "") return;
@@ -93,6 +96,9 @@ class Board extends React.Component {
     }
     winner = "";
   }
+  changePlayer(e) {
+    console.log("hi");
+  }
   render() {
     let reset = <div></div>;
     const winner = calculateWinner(this.state.squares);
@@ -119,9 +125,21 @@ class Board extends React.Component {
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
+
+    console.log(this.state);
     return (
       <div id="counter_container">
-        <Counter man={man} robot={robot} />
+        <div>
+          <Counter man={man} robot={robot} />
+          <div id="choose">
+            <div onClick={() => this.setState({player: "X"})}>
+              <X x="x_color" />
+            </div>
+            <div onClick={() => this.setState({player: "O"})}>
+              <O o="o_color" />
+            </div>
+          </div>
+        </div>
         <div id="main_container">
           <div className="status">
             <h1>{status}</h1>
@@ -145,5 +163,4 @@ class Board extends React.Component {
     );
   }
 }
-
 export default Board;

@@ -4,9 +4,9 @@ const Man = (
   <svg
     id="Layer_1"
     enable-background="new 0 0 464.056 464.056"
-    height="100"
+    height="8vh"
     viewBox="0 0 464.056 464.056"
-    width="100"
+    width="8vh"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
@@ -56,9 +56,9 @@ const Robot = (
   <svg
     id="Capa_1"
     enable-background="new 0 0 512 512"
-    height="100"
+    height="8vh"
     viewBox="0 0 512 512"
-    width="100"
+    width="8vh"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g>

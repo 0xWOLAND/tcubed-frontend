@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-function o() {
+function o(props) {
   return (
     <div>
       <svg
@@ -9,15 +9,17 @@ function o() {
         viewBox="0 0 71 71"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="path"
+        className={props.className}
       >
         <circle
           cx="35.5"
           cy="35.5"
           r="30.5"
-          fill="white"
+          fill="none"
           stroke="black"
+          className="o_path"
           stroke-width="10"
+          id={props.o}
         />
       </svg>
     </div>
