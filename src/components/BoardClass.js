@@ -110,9 +110,11 @@ class Board extends React.Component {
     } else if (this.state.num == 9) {
       status = "Tie";
       reset = (
-        <button className="btn" onClick={this.resetBoard}>
-          Reset
-        </button>
+        <div id="button_container">
+          <button className="btn" onClick={this.resetBoard}>
+            <strong> Reset</strong>
+          </button>
+        </div>
       );
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");

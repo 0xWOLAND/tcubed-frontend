@@ -35,6 +35,7 @@
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: dash 3s forwards;
+  stroke: #ffbc42;
 }
 
 @keyframes dash {
@@ -148,7 +149,7 @@ div .btn {
   height: 5vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background-color: #ffbc42;
   margin: 15px;
   padding: 10px;
