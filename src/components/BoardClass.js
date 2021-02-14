@@ -3,6 +3,9 @@ import "./style.css";
 import X from "./x";
 import O from "./o";
 import Counter from "./Counter";
+var man = 0,
+  robot = 0;
+var winner = "";
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -17,6 +20,13 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      console.trace();
+      if (squares[a] == "X") {
+        man += 1;
+      } else {
+        robot += 1;
+      }
+      winner = squares[a];
       return squares[a];
     }
   }
@@ -48,12 +58,11 @@ class Board extends React.Component {
       squares: Array(9).fill(null),
       xIsNext: true,
       num: 0,
-      man: 0,
-      robot: 0,
     };
     this.resetBoard = this.resetBoard.bind(this);
   }
   handleClick(e) {
+    if (winner != "") return;
     const squares = this.state.squares.slice();
     if (squares[e] != null) {
       return;
@@ -76,7 +85,13 @@ class Board extends React.Component {
   }
   resetBoard() {
     let clear = Array(9).fill(null);
-    this.setState({ squares: clear });
+    this.setState({ squares: clear, num: 0 });
+    if (winner == "X") {
+      man -= 1;
+    } else {
+      robot -= 1;
+    }
+    winner = "";
   }
   render() {
     let reset = <div></div>;
@@ -84,12 +99,6 @@ class Board extends React.Component {
     let status;
     if (winner) {
       status = "Winner: " + winner;
-
-      if (winner == "X") {
-        this.setState({ man: this.state.man + 1 });
-      } else {
-        this.setState({ robot: this.state.robot + 1 });
-      }
 
       reset = (
         <div id="button_container">
@@ -110,7 +119,7 @@ class Board extends React.Component {
     }
     return (
       <div id="counter_container">
-        <Counter man={this.state.man} robot={this.state.robot} />
+        <Counter man={man} robot={robot} />
         <div id="main_container">
           <div className="status">
             <h1>{status}</h1>

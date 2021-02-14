@@ -34,7 +34,7 @@
 .path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: dash 5s forwards;
+  animation: dash 3s forwards;
 }
 
 @keyframes dash {
