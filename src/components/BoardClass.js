@@ -88,7 +88,7 @@ class Board extends React.Component {
     this.setState({ squares: clear, num: 0 });
     if (winner == "X") {
       man -= 1;
-    } else {
+    } else if (winner == "O") {
       robot -= 1;
     }
     winner = "";
