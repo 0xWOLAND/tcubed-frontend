@@ -96,7 +96,7 @@ class Board extends React.Component {
     if (winner != "") return;
     const squares = this.state.squares.slice();
 
-    if (squares[e] != 'E') {
+    if (squares[e] != "E") {
       return;
     }
 
@@ -108,11 +108,11 @@ class Board extends React.Component {
     });
   }
   switchPlayer() {
-    if (this.state.player == "X") {
+    if (this.state.player == "X" && winner=="") {
       this.setState({
         player: "O",
       });
-    } else if (this.state.player == "O") {
+    } else if (this.state.player == "O" && winner=="") {
       this.setState({
         player: "X",
       });
@@ -129,7 +129,7 @@ class Board extends React.Component {
     );
   }
   resetBoard() {
-    let clear = Array(9).fill(null);
+    let clear = Array(9).fill("E");
     this.setState({
       squares: clear,
       num: 0,
@@ -150,9 +150,7 @@ class Board extends React.Component {
       status = "Winner: " + winner;
 
       reset = (
-        <div>
-          {" "}
-          id = "button_container"
+        <div id="button_container">
           <button className="btn" onClick={this.resetBoard}>
             <strong> Reset </strong>{" "}
           </button>{" "}
@@ -177,12 +175,11 @@ class Board extends React.Component {
         <div>
           <Counter man={man} robot={robot} />{" "}
           <div id="choose">
-            <div onClick={this.switchPlayer}>
-              <X x="x_color" />
-            </div>{" "}
-            <div onClick={this.switchPlayer}>
-              <O o="o_color" />
-            </div>{" "}
+            <div id="button_container" id="switchPlayer">
+              <button className="btn" onClick={this.switchPlayer}>
+                <strong> Switch Player </strong>{" "}
+              </button>{" "}
+            </div>
           </div>
         </div>{" "}
         <div id="main_container">
