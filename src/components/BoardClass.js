@@ -110,11 +110,11 @@ class Board extends React.Component {
   switchPlayer() {
     if (this.state.player == "X" && winner=="") {
       this.setState({
-        player: "O",
+        xIsNext: true,
       });
     } else if (this.state.player == "O" && winner=="") {
       this.setState({
-        player: "X",
+        xIsNext: false
       });
     }
     console.log(this.state.player);
@@ -133,6 +133,7 @@ class Board extends React.Component {
     this.setState({
       squares: clear,
       num: 0,
+      xIsNext: true
     });
     if (winner == "X") {
       man -= 1;
