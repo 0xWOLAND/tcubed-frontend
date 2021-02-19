@@ -95,7 +95,8 @@ class Board extends React.Component {
     fetchItems(this.state.player, this.state.squares);
     if (winner != "") return;
     const squares = this.state.squares.slice();
-    if (squares[e] != null) {
+
+    if (squares[e] != 'E') {
       return;
     }
 
