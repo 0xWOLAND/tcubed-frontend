@@ -108,13 +108,13 @@ class Board extends React.Component {
     });
   }
   switchPlayer() {
-    if (this.state.player == "X" && winner=="") {
+    if (this.state.player == "X" && winner == "") {
       this.setState({
         xIsNext: true,
       });
-    } else if (this.state.player == "O" && winner=="") {
+    } else if (this.state.player == "O" && winner == "") {
       this.setState({
-        xIsNext: false
+        xIsNext: false,
       });
     }
     console.log(this.state.player);
@@ -133,7 +133,7 @@ class Board extends React.Component {
     this.setState({
       squares: clear,
       num: 0,
-      xIsNext: true
+      xIsNext: true,
     });
     if (winner == "X") {
       man -= 1;
