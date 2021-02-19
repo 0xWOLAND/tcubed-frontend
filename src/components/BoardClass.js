@@ -1,4 +1,8 @@
-import React, { useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  useEffect,
+  useImperativeHandle,
+  useState
+} from "react";
 import "./style.css";
 import X from "./x";
 import O from "./o";
@@ -20,7 +24,7 @@ function calculateWinner(squares) {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] && squares[a] != "E") {
       console.trace();
       if (squares[a] == "X") {
         man += 1;
@@ -36,19 +40,41 @@ function calculateWinner(squares) {
 
 function Square(props) {
   if (props.value == "X") {
-    return (
-      <div id={props.id} className="box_element" onClick={props.onClick}>
-        <X className="path" />
-      </div>
+    return ( <
+      div id = {
+        props.id
+      }
+      className = "box_element"
+      onClick = {
+        props.onClick
+      } >
+      <
+      X className = "path" / >
+      <
+      /div>
     );
   } else if (props.value == "O") {
-    return (
-      <div id={props.id} className="box_element" onClick={props.onClick}>
-        <O className="path" />
-      </div>
+    return ( <
+      div id = {
+        props.id
+      }
+      className = "box_element"
+      onClick = {
+        props.onClick
+      } >
+      <
+      O className = "path" / >
+      <
+      /div>
     );
   } else {
-    return <div id={props.id} className="box_element" onClick={props.onClick}></div>;
+    return <div id = {
+      props.id
+    }
+    className = "box_element"
+    onClick = {
+      props.onClick
+    } > < /div>;
   }
 }
 
@@ -56,7 +82,7 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      squares: Array(9).fill(null),
+      squares: Array(9).fill("E"),
       xIsNext: true,
       num: 0,
       player: "X",
@@ -66,14 +92,22 @@ class Board extends React.Component {
   }
   handleClick(e) {
 
-    const fetchItems = async(player, board) => {
+    const fetchItems = async (player, board) => {
+      let str = "";
+      for (let i = 0; i < 9; i++) {
+        str += board[i];
+      }
       const data = await fetch(
-        "http://99.189.77.224:8000/board/" + board + "/player/" + player
+        "http://99.189.77.224:8000/board/" + str + "/player/" + player, {
+  method: 'GET',
+  headers: { 'Content-Type': 'application/json'}
+}
       );
       const items = await data.json();
       console.log(items);
       // use .click() method to simulate ai moves
     }
+    fetchItems(this.state.player, this.state.squares);
     if (winner != "") return;
     const squares = this.state.squares.slice();
     if (squares[e] != null) {
@@ -89,17 +123,25 @@ class Board extends React.Component {
   }
 
   renderSquare(e) {
-    return (
-      <Square
-      id={e}
-        value={this.state.squares[e]}
-        onClick={() => this.handleClick(e)}
+    return ( <
+      Square id = {
+        e
+      }
+      value = {
+        this.state.squares[e]
+      }
+      onClick = {
+        () => this.handleClick(e)
+      }
       />
     );
   }
   resetBoard() {
     let clear = Array(9).fill(null);
-    this.setState({ squares: clear, num: 0 });
+    this.setState({
+      squares: clear,
+      num: 0
+    });
     if (winner == "X") {
       man -= 1;
     } else if (winner == "O") {
@@ -111,66 +153,113 @@ class Board extends React.Component {
     console.log("hi");
   }
   render() {
-    let reset = <div></div>;
+    let reset = < div > < /div>;
     const winner = calculateWinner(this.state.squares);
     let status;
     if (winner) {
       status = "Winner: " + winner;
 
-      reset = (
-        <div id="button_container">
-          <button className="btn" onClick={this.resetBoard}>
-            <strong> Reset</strong>
-          </button>
-        </div>
+      reset = ( <
+        div id = "button_container" >
+        <
+        button className = "btn"
+        onClick = {
+          this.resetBoard
+        } >
+        <
+        strong > Reset < /strong> <
+        /button> <
+        /div>
       );
     } else if (this.state.num == 9) {
       status = "Tie";
-      reset = (
-        <div id="button_container">
-          <button className="btn" onClick={this.resetBoard}>
-            <strong> Reset</strong>
-          </button>
-        </div>
+      reset = ( <
+        div id = "button_container" >
+        <
+        button className = "btn"
+        onClick = {
+          this.resetBoard
+        } >
+        <
+        strong > Reset < /strong> <
+        /button> <
+        /div>
       );
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
 
     console.log(this.state);
-    return (
-      <div id="counter_container">
-        <div>
-          <Counter man={man} robot={robot} />
-          <div id="choose">
-            <div onClick={() => this.setState({player: "X"})}>
-              <X x="x_color" />
-            </div>
-            <div onClick={() => this.setState({player: "O"})}>
-              <O o="o_color" />
-            </div>
-          </div>
-        </div>
-        <div id="main_container">
-          <div className="status">
-            <h1>{status}</h1>
-          </div>
-          <div id="board_container">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
+    return ( <
+      div id = "counter_container" >
+      <
+      div >
+      <
+      Counter man = {
+        man
+      }
+      robot = {
+        robot
+      }
+      /> <
+      div id = "choose" >
+      <
+      div onClick = {
+        () => this.setState({
+          player: "X"
+        })
+      } >
+      <
+      X x = "x_color" / >
+      <
+      /div> <
+      div onClick = {
+        () => this.setState({
+          player: "O"
+        })
+      } >
+      <
+      O o = "o_color" / >
+      <
+      /div> <
+      /div> <
+      /div> <
+      div id = "main_container" >
+      <
+      div className = "status" >
+      <
+      h1 > {
+        status
+      } < /h1> <
+      /div> <
+      div id = "board_container" > {
+        this.renderSquare(0)
+      } {
+        this.renderSquare(1)
+      } {
+        this.renderSquare(2)
+      }
 
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
+      {
+        this.renderSquare(3)
+      } {
+        this.renderSquare(4)
+      } {
+        this.renderSquare(5)
+      }
 
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
-          {reset}
-        </div>
-      </div>
+      {
+        this.renderSquare(6)
+      } {
+        this.renderSquare(7)
+      } {
+        this.renderSquare(8)
+      } <
+      /div> {
+        reset
+      } <
+      /div> <
+      /div>
     );
   }
 }

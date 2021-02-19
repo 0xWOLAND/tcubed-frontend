@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+// Use this after the variable declaration
 ReactDOM.render(
   <React.StrictMode>
     <App />
