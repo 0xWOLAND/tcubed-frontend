@@ -37,18 +37,18 @@ function calculateWinner(squares) {
 function Square(props) {
   if (props.value == "X") {
     return (
-      <div className="box_element" onClick={props.onClick}>
+      <div id={props.id} className="box_element" onClick={props.onClick}>
         <X className="path" />
       </div>
     );
   } else if (props.value == "O") {
     return (
-      <div className="box_element" onClick={props.onClick}>
+      <div id={props.id} className="box_element" onClick={props.onClick}>
         <O className="path" />
       </div>
     );
   } else {
-    return <div className="box_element" onClick={props.onClick}></div>;
+    return <div id={props.id} className="box_element" onClick={props.onClick}></div>;
   }
 }
 
@@ -65,11 +65,21 @@ class Board extends React.Component {
     this.changePlayer = this.changePlayer.bind(this);
   }
   handleClick(e) {
+
+    const fetchItems = async(player, board) => {
+      const data = await fetch(
+        "http://99.189.77.224:8000/board/" + board + "/player/" + player
+      );
+      const items = await data.json();
+      console.log(items);
+      // use .click() method to simulate ai moves
+    }
     if (winner != "") return;
     const squares = this.state.squares.slice();
     if (squares[e] != null) {
       return;
     }
+
     squares[e] = this.state.xIsNext ? "X" : "O";
     this.setState({
       squares: squares,
@@ -81,6 +91,7 @@ class Board extends React.Component {
   renderSquare(e) {
     return (
       <Square
+      id={e}
         value={this.state.squares[e]}
         onClick={() => this.handleClick(e)}
       />
