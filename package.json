@@ -1,7 +1,7 @@
 {
   "name": "tcubed",
   "version": "0.1.0",
-  "homepage": "http://bhargavannem.github.io/tcubed",
+  "homepage": "http://bhargavannem.github.io/tcubed-frontend",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
