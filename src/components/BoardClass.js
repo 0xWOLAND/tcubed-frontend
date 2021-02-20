@@ -92,29 +92,33 @@ class Board extends React.Component {
       console.log(items);
       // use .click() method to simulate ai moves
     };
-    fetchItems(this.state.player, this.state.squares);
     if (winner != "") return;
-    const squares = this.state.squares.slice();
+    let squares = this.state.squares.slice();
 
     if (squares[e] != "E") {
       return;
     }
 
+    // fetchItems(this.state.player == "X" ? "O" : "X", squares);
     squares[e] = this.state.xIsNext ? "X" : "O";
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
       num: this.state.num + 1,
     });
+
+    fetchItems("X", squares);
   }
   switchPlayer() {
     if (this.state.player == "X" && winner == "") {
       this.setState({
-        xIsNext: true,
+        xIsNext: false,
+        player: "O",
       });
     } else if (this.state.player == "O" && winner == "") {
       this.setState({
-        xIsNext: false,
+        xIsNext: true,
+        player: "X",
       });
     }
     console.log(this.state.player);
@@ -170,7 +174,6 @@ class Board extends React.Component {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
 
-    console.log(this.state);
     return (
       <div id="counter_container">
         <div>
