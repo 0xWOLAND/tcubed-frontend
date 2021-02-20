@@ -80,7 +80,7 @@ class Board extends React.Component {
         str += board[i];
       }
       const data = await fetch(
-        "http://99.189.77.224:8000/board/" + str + "/player/" + player,
+        "http://127.0.01:8000/board/" + str + "/player/" + player,
         {
           method: "GET",
           headers: {
@@ -90,24 +90,30 @@ class Board extends React.Component {
       );
       const items = await data.json();
       console.log(items);
+      squares[3 * items[0] + items[1]] = player;
+
+      this.setState({
+        squares: squares,
+        xIsNext: !this.state.xIsNext,
+        num: this.state.num + 1,
+      });
+      return items;
       // use .click() method to simulate ai moves
     };
     if (winner != "") return;
     let squares = this.state.squares.slice();
-
+    let ai = this.state.player == "X" ? "O" : "X";
     if (squares[e] != "E") {
       return;
     }
 
-    // fetchItems(this.state.player == "X" ? "O" : "X", squares);
     squares[e] = this.state.xIsNext ? "X" : "O";
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
       num: this.state.num + 1,
     });
-
-    fetchItems("X", squares);
+    fetchItems(this.state.player == "X" ? "O" : "X", squares);
   }
   switchPlayer() {
     if (this.state.player == "X" && winner == "") {
@@ -151,6 +157,7 @@ class Board extends React.Component {
     let reset = <div> </div>;
     const winner = calculateWinner(this.state.squares);
     let status;
+    console.log(this.state.num);
     if (winner) {
       status = "Winner: " + winner;
 
@@ -161,7 +168,7 @@ class Board extends React.Component {
           </button>{" "}
         </div>
       );
-    } else if (this.state.num == 9) {
+    } else if (this.state.num == 9 || this.state.num == 10) {
       status = "Tie";
       reset = (
         <div id="button_container">
