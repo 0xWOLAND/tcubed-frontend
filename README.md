@@ -1,9 +1,16 @@
 # T-Cubed-Frontend
-The frontend for a minimax website using ReactJS and NodeJS. This is the UI/UX for Jack Davidson's algorithm in C (https://github.com/jack-davidson/supertactoe)
+The frontend for a minimax website using ReactJS and NodeJS. This is the UI/UX for Jack Davidson's algorithm (https://github.com/jack-davidson/tcubed-api)
 
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
+- ReactJS Frontend
+    - Languages: 
+        - JavaScript (Technically JSX)
+        - HTML/CSS
+- FastAPI Backend
+    - Language: 
+        - Python
+- Algorithm
+    - Minimax (Credit to GeeksForGeeks)
 
 ## Available Scripts
 
