@@ -1,5 +1,6 @@
 import React, { useEffect, useImperativeHandle, useState } from "react";
 import "./style.css";
+import "./toggle.css";
 import X from "./x";
 import O from "./o";
 import Counter from "./Counter";
@@ -69,37 +70,41 @@ class Board extends React.Component {
       xIsNext: true,
       num: 0,
       player: "X",
+      goesFirst: "AI",
     };
     this.resetBoard = this.resetBoard.bind(this);
     this.switchPlayer = this.switchPlayer.bind(this);
+    this.handleChangePerson = this.handleChangePerson.bind(this);
   }
-  handleClick(e) {
-    const fetchItems = async (player, board) => {
-      let str = "";
-      for (let i = 0; i < 9; i++) {
-        str += board[i];
-      }
-      const data = await fetch(
-        "http://127.0.01:8000/board/" + str + "/player/" + player,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const items = await data.json();
-      console.log(items);
-      squares[3 * items[0] + items[1]] = player;
 
-      this.setState({
-        squares: squares,
-        xIsNext: !this.state.xIsNext,
-        num: this.state.num + 1,
-      });
-      return items;
-      // use .click() method to simulate ai moves
-    };
+  async fetchItems(player, squares) {
+    let str = "";
+    for (let i = 0; i < 9; i++) {
+      str += squares[i];
+    }
+    const data = await fetch(
+      "http://127.0.01:8000/board/" + str + "/player/" + player,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const items = await data.json();
+    console.log(items);
+    squares[3 * items[0] + items[1]] = player;
+
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+      num: this.state.num + 1,
+    });
+    return items;
+    // use .click() method to simulate ai moves
+  }
+
+  handleClick(e) {
     if (winner != "") return;
     let squares = this.state.squares.slice();
     let ai = this.state.player == "X" ? "O" : "X";
@@ -113,9 +118,10 @@ class Board extends React.Component {
       xIsNext: !this.state.xIsNext,
       num: this.state.num + 1,
     });
-    fetchItems(this.state.player == "X" ? "O" : "X", squares);
+    this.fetchItems(this.state.player == "X" ? "O" : "X", squares);
   }
   switchPlayer() {
+    if (this.state.num != 0) return;
     if (this.state.player == "X" && winner == "") {
       this.setState({
         xIsNext: false,
@@ -153,6 +159,32 @@ class Board extends React.Component {
     winner = "";
   }
 
+  handleChangePerson() {
+    const current_first_person = this.state.goesFirst;
+    if (this.state.num != 0) return;
+    this.setState({
+      goesFirst: current_first_person == "Person" ? "AI" : "Person",
+    });
+    if (this.state.goesFirst == "AI") {
+      let squares = this.state.squares.slice();
+      this.fetchItems(this.state.player == "X" ? "O" : "X", squares);
+      console.log("here");
+      this.setState({
+        
+        xIsNext: !this.state.xIsNext,
+        num: this.state.num - 1,
+      });
+    }
+    console.log(this.state.goesFirst);
+  }
+
+  isNotFull() {
+    const squares = this.state.squares;
+    for (let i = 0; i < 9; i++){
+      if (squares[i] == 'E') return true;
+    }
+    return false;
+  }
   render() {
     let reset = <div> </div>;
     const winner = calculateWinner(this.state.squares);
@@ -168,7 +200,7 @@ class Board extends React.Component {
           </button>{" "}
         </div>
       );
-    } else if (this.state.num == 9 || this.state.num == 10) {
+    } else if (!this.isNotFull()) {
       status = "Tie";
       reset = (
         <div id="button_container">
@@ -190,6 +222,21 @@ class Board extends React.Component {
               <button className="btn" onClick={this.switchPlayer}>
                 <strong> Switch Player </strong>{" "}
               </button>{" "}
+            </div>
+          </div>
+          <div id="choose">
+            <div class="toggle-button-cover">
+              <div class="button-cover">
+                <div class="button r" id="button-1">
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    onClick={this.handleChangePerson}
+                  />
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>{" "}

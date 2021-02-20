@@ -148,13 +148,13 @@ const Robot = (
 function Counter(props) {
   return (
     <div id="counter_box">
-      <h1 className="score_keeper">
+      <h3 className="score_keeper">
         {Man}: {props.man}
-      </h1>
+      </h3>
 
-      <h1 className="score_keeper">
+      <h3 className="score_keeper">
         {Robot}: {props.robot}
-      </h1>
+      </h3>
     </div>
   );
 }
