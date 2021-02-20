@@ -81,7 +81,7 @@ class Board extends React.Component {
       str += squares[i];
     }
     const data = await fetch(
-      "http://127.0.01:8000/board/" + str + "/player/" + player,
+      "http://99.189.77.224:8000/board/" + str + "/player/" + player,
       {
         method: "GET",
         headers: {
