@@ -73,8 +73,6 @@ class Board extends React.Component {
       goesFirst: "AI",
     };
     this.resetBoard = this.resetBoard.bind(this);
-    this.switchPlayer = this.switchPlayer.bind(this);
-    this.handleChangePerson = this.handleChangePerson.bind(this);
   }
 
   async fetchItems(player, squares) {
@@ -100,6 +98,7 @@ class Board extends React.Component {
       xIsNext: !this.state.xIsNext,
       num: this.state.num + 1,
     });
+    console.log(squares);
     return items;
     // use .click() method to simulate ai moves
   }
@@ -120,21 +119,7 @@ class Board extends React.Component {
     });
     this.fetchItems(this.state.player == "X" ? "O" : "X", squares);
   }
-  switchPlayer() {
-    if (this.state.num != 0) return;
-    if (this.state.player == "X" && winner == "") {
-      this.setState({
-        xIsNext: false,
-        player: "O",
-      });
-    } else if (this.state.player == "O" && winner == "") {
-      this.setState({
-        xIsNext: true,
-        player: "X",
-      });
-    }
-    console.log(this.state.player);
-  }
+
   renderSquare(e) {
     return (
       <Square
@@ -159,29 +144,10 @@ class Board extends React.Component {
     winner = "";
   }
 
-  handleChangePerson() {
-    const current_first_person = this.state.goesFirst;
-    if (this.state.num != 0) return;
-    this.setState({
-      goesFirst: current_first_person == "Person" ? "AI" : "Person",
-    });
-    if (this.state.goesFirst == "AI") {
-      let squares = this.state.squares.slice();
-      this.fetchItems(this.state.player == "X" ? "O" : "X", squares);
-      console.log("here");
-      this.setState({
-        
-        xIsNext: !this.state.xIsNext,
-        num: this.state.num - 1,
-      });
-    }
-    console.log(this.state.goesFirst);
-  }
-
   isNotFull() {
     const squares = this.state.squares;
-    for (let i = 0; i < 9; i++){
-      if (squares[i] == 'E') return true;
+    for (let i = 0; i < 9; i++) {
+      if (squares[i] == "E") return true;
     }
     return false;
   }
@@ -217,28 +183,6 @@ class Board extends React.Component {
       <div id="counter_container">
         <div>
           <Counter man={man} robot={robot} />{" "}
-          <div id="choose">
-            <div id="button_container" id="switchPlayer">
-              <button className="btn" onClick={this.switchPlayer}>
-                <strong> Switch Player </strong>{" "}
-              </button>{" "}
-            </div>
-          </div>
-          <div id="choose">
-            <div class="toggle-button-cover">
-              <div class="button-cover">
-                <div class="button r" id="button-1">
-                  <input
-                    type="checkbox"
-                    class="checkbox"
-                    onClick={this.handleChangePerson}
-                  />
-                  <div class="knobs"></div>
-                  <div class="layer"></div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>{" "}
         <div id="main_container">
           <div className="status">
